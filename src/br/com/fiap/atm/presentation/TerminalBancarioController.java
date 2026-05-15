@@ -37,7 +37,7 @@ public class TerminalBancarioController {
     public void exibirMovimentacoes() {
         System.out.println("--- EXTRATO DE MOVIMENTAÇÕES ---");
         contaService.obterMovimentacoes().forEach(movimentacao -> {
-            System.out.println(movimentacao);
+            System.out.println(movimentacao.toString());
         });
     }
 

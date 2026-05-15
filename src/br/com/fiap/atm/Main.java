@@ -27,22 +27,20 @@ public class Main {
         System.out.println("BEM VINDO AO FIAP-BANK");
         System.out.println();
 
-        // 2. PERGUNTA AO USUÁRIO O SALDO INICIAL:
+
         System.out.print("Digite o saldo inicial para abertura da conta: R$ ");
         double valorInicialDigitado = input.nextDouble();
 
-        // 3. Transforma o valor digitado no objeto Dinheiro dinamicamente
+
         Dinheiro saldoInicial = new Dinheiro(BigDecimal.valueOf(valorInicialDigitado));
 
-        // 4. Cria a fábrica e passa o saldo escolhido pelo usuário
+
         ContaFactory fabrica = ContaFactory.getInstance();
         Conta contaCliente = fabrica.criarContaCorrente(cliente, saldoInicial);
 
-        // 5. Inicializa os serviços e o controller normalmente com a nova conta
         ContaService contaService = new ContaService(contaCliente);
         AutenticacaoService autenticacaoService = new AutenticacaoService(contaCliente);
         TerminalBancarioController controller = new TerminalBancarioController(contaService, autenticacaoService);
-
 
         int opcao = 0;
 

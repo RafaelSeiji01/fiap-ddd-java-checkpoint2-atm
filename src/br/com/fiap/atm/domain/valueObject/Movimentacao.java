@@ -32,6 +32,7 @@ public class Movimentacao extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Operação: " + this.tipo + " | Valor: R$ " + this.valor.getValor();
+        //super totring para formatação de dados de dia e hora
+        return "Operação: " + this.tipo + " | Valor: R$ " + this.valor.getValor() + "\n" + getDataHora().getHour() + ":"+ getDataHora().getMinute() + " | data: " + getDataHora().getDayOfMonth() + "/" + getDataHora().getMonthValue() +"/"+ getDataHora().getYear();
     }
 }

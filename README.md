@@ -2,6 +2,8 @@
 
 O **FiapBank ATM** é uma aplicação de terminal interativa que simula o funcionamento de um Caixa Eletrônico (ATM). O projeto foi desenvolvido aplicando conceitos avançados de **Programação Orientada a Objetos (POO)** e seguindo princípios de arquitetura limpa e padrões de projeto de mercado.
 
+obs:Fiz o projeto sem commits por que o meu github estava com erro de Connect timed out, impossibilitando na criação do repositorio em questao :)
+
 ---
 
 ## Tecnologias e Conceitos Utilizados

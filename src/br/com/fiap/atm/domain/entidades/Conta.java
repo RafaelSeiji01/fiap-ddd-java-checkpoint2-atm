@@ -27,6 +27,12 @@ public abstract class Conta extends BaseEntity{
         this.contaAcesso = contaAcesso;
         this.saldo = saldo;
         this.taxa = taxa;
+
+        if (contaAcesso == null) {
+            this.contaAcesso = new ContaAcesso("123456");
+        } else {
+            this.contaAcesso = contaAcesso;
+        }
     }
 
     public Cliente getCliente() {

@@ -6,8 +6,10 @@ public class ContaAcesso {
     private Boolean bloqueado;
     public static final Integer MAXIMO_TENTATIVAS = 3;
 
-    public ContaAcesso(String senha) {
-        this.senha = senha;
+    public ContaAcesso(String senhaU) {
+        this.senha = senhaU;
+        this.tentativas = 0;
+        this.bloqueado = false; // Começa destravada
     }
 
 

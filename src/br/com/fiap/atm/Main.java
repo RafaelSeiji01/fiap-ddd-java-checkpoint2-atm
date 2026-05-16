@@ -16,31 +16,56 @@ public class Main {
 
         Scanner input = new Scanner(System.in);
 
-        String nomeCompleto = null;
-        System.out.print("Para começar digite o seu nome Completo: ");
-        nomeCompleto = input.nextLine();
-        Cliente cliente = new Cliente(nomeCompleto);
-        System.out.println("Cliente: " + cliente.getNomeCompleto());
-        System.out.println("Primeiro Nome: " + cliente.obterPrimeiroNome());
         System.out.println("=========================================");
-        System.out.println();
-        System.out.println("BEM VINDO AO FIAP-BANK");
+        System.out.println("          BEM-VINDO AO FIAP-BANK         ");
+        System.out.println("=========================================");
+        System.out.println("Senha: 123456");
         System.out.println();
 
+        // 1. CRIAÇÃO DO CLIENTE (Dinâmico)
+        System.out.print("Para começar, digite o seu nome completo: ");
+        String nomeCompleto = input.nextLine();
+        Cliente cliente = new Cliente(nomeCompleto);
+
+        System.out.println("Cliente cadastrado: " + cliente.getNomeCompleto());
+        System.out.println("Primeiro Nome: " + cliente.obterPrimeiroNome());
+        System.out.println();
 
         System.out.print("Digite o saldo inicial para abertura da conta: R$ ");
         double valorInicialDigitado = input.nextDouble();
-
-
         Dinheiro saldoInicial = new Dinheiro(BigDecimal.valueOf(valorInicialDigitado));
-
 
         ContaFactory fabrica = ContaFactory.getInstance();
         Conta contaCliente = fabrica.criarContaCorrente(cliente, saldoInicial);
 
+
         ContaService contaService = new ContaService(contaCliente);
         AutenticacaoService autenticacaoService = new AutenticacaoService(contaCliente);
         TerminalBancarioController controller = new TerminalBancarioController(contaService, autenticacaoService);
+
+        boolean acessoConcedido = false;
+
+        System.out.println("\n=========================================");
+        System.out.println(" INTRODUZA SUAS CREDENCIAIS DE ACESSO");
+        System.out.println("=========================================");
+
+        while (!acessoConcedido && !contaCliente.getContaAcesso().isBloqueado()) {
+            System.out.print("Digite a sua senha de acesso: ");
+            String senhaDigitada = input.next();
+            System.out.println();
+
+            acessoConcedido = autenticacaoService.autorizar(senhaDigitada);
+        }
+
+        if (contaCliente.getContaAcesso().isBloqueado()) {
+            System.out.println("Transação abortada: Este cartão foi retido por excesso de tentativas!");
+            System.out.println("Procure sua agência física para efetuar o desbloqueio.");
+            input.close();
+            return;
+        }
+
+        System.out.println(" Autenticação realizada com sucesso!");
+        System.out.println();
 
         int opcao = 0;
 
